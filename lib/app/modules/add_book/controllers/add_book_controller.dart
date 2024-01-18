@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:petugas_perpustakaan_app/app/modules/book/controllers/book_controller.dart';
 
 
 import '../../../data/constant/endpoint.dart';
@@ -14,6 +15,7 @@ class AddBookController extends GetxController {
   final TextEditingController penulisController = TextEditingController();
   final TextEditingController penerbitController = TextEditingController();
   final TextEditingController tahunController = TextEditingController();
+  final BookController _bookController= Get.find();
 
   final count = 0.obs;
   @override
@@ -50,6 +52,7 @@ class AddBookController extends GetxController {
             }
         );
         if (response.statusCode == 201) {
+          _bookController.getData();
           Get.back();
         } else {
           Get.snackbar("Sorry", "Gagal menyimpan data", backgroundColor: Colors.orange);
